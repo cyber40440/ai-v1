@@ -165,33 +165,6 @@
     const inputField = document.getElementById("user-msg");
     const display = document.getElementById("display");
 
-   </script>
-    function process() {
-        const rawInput = inputField.value;
-        if (!rawInput) return;
-        const val = rawInput.toLowerCase().trim();
-        
-        let response = checkMemory(val) || solveMath(val);
-
-        if (!response) {
-            // New logic: This checks if ANY word you typed matches a trigger
-            const inputWords = val.split(" ");
-            for (let word of inputWords) {
-                if (brain[word]) {
-                    response = brain[word][Math.floor(Math.random() * brain[word].length)];
-                    break;
-                }
-            }
-        }
-
-        if (!response) response = "I'm still learning about that. Try 'space', 'science', or 'coding'!";
-
-        display.innerHTML += `<p><span class="user-text">YOU:</span> ${rawInput}<br><span class="ai-text">AI:</span> ${response}</p>`;
-        display.scrollTop = display.scrollHeight;
-        inputField.value = "";
-    }
-
-    btn.onclick = process;
-    inputField.addEventListener("keypress", (e) => { if (e.key === "Enter") process(); });
+</script>
 </body>
 </html>
