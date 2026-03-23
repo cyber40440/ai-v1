@@ -2,43 +2,79 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Cyber-Bot: Massive Brain</title>
+    <title>Cyber-Bot: Massive Brain Edition</title>
     <style>
-        body { background: #000; color: #00ff41; font-family: 'Courier New', monospace; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; overflow: hidden; }
-        #chat-container { border: 2px solid #00ff41; width: 90%; max-width: 500px; padding: 20px; border-radius: 15px; box-shadow: 0 0 20px #00ff41; background: #000; position: relative; }
-        #display { height: 300px; overflow-y: auto; border-bottom: 1px solid #00ff41; margin-bottom: 15px; padding: 10px; font-size: 14px; }
-        .input-area { display: flex; gap: 10px; }
-        input { background: #000; border: 1px solid #00ff41; color: #00ff41; flex-grow: 1; padding: 12px; outline: none; }
-        button { background: #00ff41; color: #000; border: none; padding: 10px 20px; font-weight: bold; cursor: pointer; }
-        button:hover { background: #fff; }
-        .user-line { color: #fff; margin-bottom: 5px; }
-        .ai-line { color: #00ff41; font-weight: bold; margin-bottom: 15px; }
+        body { background: #050505; color: #00ff41; font-family: 'Courier New', monospace; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        #chat-container { border: 2px solid #00ff41; width: 400px; padding: 20px; border-radius: 15px; box-shadow: 0 0 20px #00ff41; background: #000; }
+        #display { height: 250px; overflow-y: auto; border-bottom: 1px solid #00ff41; margin-bottom: 15px; padding: 10px; line-height: 1.4; }
+        input { background: #000; border: 1px solid #00ff41; color: #00ff41; width: 70%; padding: 10px; outline: none; }
+        button { background: #00ff41; color: #000; border: none; padding: 10px 15px; font-weight: bold; cursor: pointer; border-radius: 3px; }
+        button:hover { background: #008f11; }
+        .user-text { color: #fff; }
+        .ai-text { color: #00ff41; font-weight: bold; }
     </style>
 </head>
 <body>
 
 <div id="chat-container">
     <h2 style="text-align: center; margin-top: 0;">CYBER-BRAIN v2.0</h2>
-    <div id="display">SYSTEM INITIALIZED... Type 'help' to see commands.</div>
-    <div class="input-area">
-        <input type="text" id="user-msg" placeholder="Enter command..." autocomplete="off">
+    <div id="display">System Initialized... Type 'help' to start.</div>
+    <div style="display: flex; gap: 5px;">
+        <input type="text" id="user-msg" placeholder="Command..." autocomplete="off">
         <button id="btn">SEND</button>
     </div>
 </div>
 
 <script>
-    // --- THE BIG BRAIN DATA ---
+    // 1. THE MASSIVE BRAIN (Knowledge Base)
     const brain = {
-        "hello": ["System online. Greetings.", "Hello! Logic circuits ready.", "Connection established."],
-        "joke": ["Why did the math book look sad? It had too many problems.", "What's an AI's favorite snack? Computer chips!"],
-        "pizza": ["Pizza is 100% compatible with my hardware.", "Data suggests pepperoni is the best topping."],
-        "roblox": ["Roblox is great! Do you like building or playing?", "Roblox uses Lua code!"],
-        "space": ["Space is infinite. Mars is the Red Planet.", "The moon is 238,855 miles away."],
-        "coding": ["JavaScript is the language of the web!", "Coding is just logic and magic."],
-        "help": ["Try: 'joke', 'pizza', 'space', 'coding', or math like '10 + 10'."]
+        "hello": ["System online. Greetings.", "Hello! My logic circuits are ready.", "Connection established, human."],
+        "hi": ["Hey!", "Hello there!", "Greetings."],
+        "joke": [
+            "Why did the math book look sad? It had too many problems.",
+            "I asked my computer for a joke. It said: 'Windows is updating'.",
+            "What's a robot's favorite exercise? Circuit training!"
+        ],
+        "name": ["I am the Cyber-Bot 2.0.", "My name is your Offline Chromebook AI."],
+        "pizza": ["Pizza is the perfect fuel for binary minds.", "I prefer pepperoni pixels.", "Data shows pizza is 100% delicious."],
+        "color": ["I like #00ff41 (Matrix Green)!", "Blue reminds me of a calm sky.", "I see the world in binary, but I like color!"],
+        "who": ["I am a JavaScript AI running entirely on your machine.", "You built me! I'm your local creation."],
+        "roblox": ["Roblox is great! Do you like Brookhaven or Adopt Me?", "I enjoy games with good logic."],
+        "minecraft": ["Mining blocks is very therapeutic for an AI.", "Watch out for Creepers!"],
+        "bye": ["Shutting down... just kidding! Goodbye.", "See you in the next session.", "Have a great day!"],
+        "help": ["I can: 1. Chat about games/food. 2. Do math (5+5). 3. Remember your name!"]
     };
 
-    // --- THE BRAIN LOGIC ---
+    // 2. MATH ENGINE
+    function solveMath(input) {
+        const match = input.match(/(\d+)\s*([\+\-\*\/])\s*(\d+)/);
+        if (match) {
+            const n1 = parseFloat(match[1]), op = match[2], n2 = parseFloat(match[3]);
+            let res;
+            if (op === "+") res = n1 + n2;
+            else if (op === "-") res = n1 - n2;
+            else if (op === "*") res = n1 * n2;
+            else if (op === "/") res = n2 !== 0 ? n1 / n2 : "Infinity";
+            return "MATH RESULT: " + res;
+        }
+        return null;
+    }
+
+    // 3. MEMORY ENGINE
+    function checkMemory(input) {
+        if (input.includes("my name is")) {
+            const name = input.split("my name is ")[1];
+            localStorage.setItem("savedName", name);
+            return "MEMORY UPDATED: I will remember you, " + name + ".";
+        }
+        if (input.includes("what is my name")) {
+            const saved = localStorage.getItem("savedName");
+            return saved ? "YOUR IDENTITY: You are " + saved + "." : "I don't know you yet! Say 'My name is [name]'.";
+        }
+        return null;
+    }
+
+    // 4. MAIN PROCESSING
     const btn = document.getElementById("btn");
     const inputField = document.getElementById("user-msg");
     const display = document.getElementById("display");
@@ -46,40 +82,28 @@
     function process() {
         const rawInput = inputField.value;
         if (!rawInput) return;
-        const val = rawInput.toLowerCase().trim();
+        const val = rawInput.toLowerCase();
         
-        let response = "";
+        let response = checkMemory(val) || solveMath(val);
 
-        // 1. Try Math
-        const mathMatch = val.match(/(\d+)\s*([\+\-\*\/])\s*(\d+)/);
-        if (mathMatch) {
-            const n1 = parseFloat(mathMatch[1]), op = mathMatch[2], n2 = parseFloat(mathMatch[3]);
-            let res = (op==="+")?n1+n2 : (op==="-")?n1-n2 : (op==="*")?n1*n2 : (n2!==0?n1/n2:"Error");
-            response = "MATH RESULT: " + res;
-        }
-
-        // 2. Try Word Brain
         if (!response) {
             for (let t in brain) {
                 if (val.includes(t)) {
-                    response = "AI: " + brain[t][Math.floor(Math.random() * brain[t].length)];
+                    response = brain[t][Math.floor(Math.random() * brain[t].length)];
                     break;
                 }
             }
         }
 
-        if (!response) response = "AI: Command not recognized. Try 'help'.";
+        if (!response) response = "DATA NOT FOUND. Try math or 'help'.";
 
-        // Update Screen
-        display.innerHTML += `<div class="user-line">YOU: ${rawInput}</div>`;
-        display.innerHTML += `<div class="ai-line">${response}</div>`;
+        display.innerHTML += `<p><span class="user-text">YOU:</span> ${rawInput}<br><span class="ai-text">AI:</span> ${response}</p>`;
         display.scrollTop = display.scrollHeight;
         inputField.value = "";
     }
 
     btn.onclick = process;
-    inputField.onkeypress = (e) => { if(e.key === "Enter") process(); };
+    inputField.addEventListener("keypress", (e) => { if (e.key === "Enter") process(); });
 </script>
-
 </body>
 </html>
