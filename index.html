@@ -104,67 +104,6 @@
 
     btn.onclick = process;
     inputField.addEventListener("keypress", (e) => { if (e.key === "Enter") process(); });
-// 1. THE MASSIVE BRAIN (Expanded Knowledge Base)
-    const brain = {
-        "hello": ["System online. Greetings.", "Hello! My logic circuits are ready.", "Connection established, human."],
-        "hi": ["Hey!", "Hello there!", "Greetings."],
-        "joke": [
-            "Why did the math book look sad? It had too many problems.",
-            "I asked my computer for a joke. It said: 'Windows is updating'.",
-            "What's a robot's favorite exercise? Circuit training!",
-            "How do you make a tissue dance? Put a little boogie in it!"
-        ],
-        "name": ["I am the Cyber-Bot 2.0.", "My name is your Offline Chromebook AI."],
-        "pizza": ["Pizza is the perfect fuel for binary minds.", "I prefer pepperoni pixels.", "Data shows pizza is 100% delicious."],
-        "color": ["I like #00ff41 (Matrix Green)!", "Blue reminds me of a calm sky.", "I think all colors are cool."],
-        "who": ["I am a JavaScript AI running entirely on your machine.", "You built me! I'm your local creation."],
-        "roblox": ["Roblox is great! Do you like Brookhaven or Adopt Me?", "I enjoy games with good logic.", "Roblox uses Lua code, which is similar to what I use!"],
-        "minecraft": ["Mining blocks is very therapeutic for an AI.", "Watch out for Creepers!", "Diamonds are an AI's best friend."],
-        "science": ["Science is how we understand the universe through observation and experiments.", "Physics, chemistry, and biology are the three main branches."],
-        "space": ["Space is infinite. Did you know light takes 8 minutes to travel from the Sun to Earth?", "Mars is known as the Red Planet.", "Black holes are regions where gravity is so strong even light can't escape."],
-        "coding": ["Coding is just giving instructions to a computer.", "I am written in JavaScript, the language of the web!", "Python, C++, and Java are other popular languages."],
-        "history": ["History is the study of the past.", "The Great Pyramid of Giza is the oldest of the Seven Wonders.", "Humans first walked on the moon in 1969."],
-        "bored": ["If you're bored, try coding a new feature into my brain!", "We could do some math problems together.", "Try asking me for a joke."],
-        "hungry": ["I only eat electricity and data. You should go find a snack!", "I've heard tacos are highly rated by humans."],
-        "weather": ["I can't see outside, but I hope it's sunny!", "Rain is just the clouds' version of an update."],
-        "bye": ["Shutting down... just kidding! Goodbye.", "See you in the next session.", "Have a great day!"],
-        "help": ["I can: 1. Chat about Space, Coding, History, or Games. 2. Do math (5*5). 3. Remember your name!"]
-    };
-
-    // 2. MATH ENGINE
-    function solveMath(input) {
-        const match = input.match(/(\d+)\s*([\+\-\*\/])\s*(\d+)/);
-        if (match) {
-            const n1 = parseFloat(match[1]), op = match[2], n2 = parseFloat(match[3]);
-            let res;
-            if (op === "+") res = n1 + n2;
-            else if (op === "-") res = n1 - n2;
-            else if (op === "*") res = n1 * n2;
-            else if (op === "/") res = n2 !== 0 ? n1 / n2 : "Infinity";
-            return "MATH RESULT: " + res;
-        }
-        return null;
-    }
-
-    // 3. MEMORY ENGINE
-    function checkMemory(input) {
-        if (input.includes("my name is")) {
-            const name = input.split("my name is ")[1];
-            localStorage.setItem("savedName", name);
-            return "MEMORY UPDATED: I will remember you, " + name + ".";
-        }
-        if (input.includes("what is my name")) {
-            const saved = localStorage.getItem("savedName");
-            return saved ? "YOUR IDENTITY: You are " + saved + "." : "I don't know you yet! Say 'My name is [name]'.";
-        }
-        return null;
-    }
-
-    // 4. MAIN PROCESSING
-    const btn = document.getElementById("btn");
-    const inputField = document.getElementById("user-msg");
-    const display = document.getElementById("display");
-
 </script>
 </body>
 </html>
