@@ -1,69 +1,109 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>My Cyber AI</title>
+    <meta charset="UTF-8">
+    <title>Cyber-Bot: Massive Brain Edition</title>
     <style>
-        body { background: #000; color: #0f0; font-family: 'Courier New', Courier, monospace; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
-        #chat-card { border: 2px solid #0f0; padding: 20px; width: 350px; box-shadow: 0 0 15px #0f0; border-radius: 10px; }
-        input { background: #111; border: 1px solid #0f0; color: #0f0; width: 70%; padding: 10px; }
-        button { background: #0f0; color: #000; border: none; padding: 10px; font-weight: bold; cursor: pointer; }
-        #display { margin-top: 20px; min-height: 100px; border-top: 1px solid #0f0; padding-top: 10px; font-size: 0.9em; }
+        body { background: #050505; color: #00ff41; font-family: 'Courier New', monospace; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        #chat-container { border: 2px solid #00ff41; width: 400px; padding: 20px; border-radius: 15px; box-shadow: 0 0 20px #00ff41; background: #000; }
+        #display { height: 250px; overflow-y: auto; border-bottom: 1px solid #00ff41; margin-bottom: 15px; padding: 10px; line-height: 1.4; }
+        input { background: #000; border: 1px solid #00ff41; color: #00ff41; width: 70%; padding: 10px; outline: none; }
+        button { background: #00ff41; color: #000; border: none; padding: 10px 15px; font-weight: bold; cursor: pointer; border-radius: 3px; }
+        button:hover { background: #008f11; }
+        .user-text { color: #fff; }
+        .ai-text { color: #00ff41; font-weight: bold; }
     </style>
 </head>
 <body>
 
-<div id="chat-card">
-    <h2>CYBER-BOT v1.0</h2>
-    <input type="text" id="user-msg" placeholder="Ask me anything...">
-    <button id="btn">SEND</button>
-    <div id="display">Awaiting command...</div>
+<div id="chat-container">
+    <h2 style="text-align: center; margin-top: 0;">CYBER-BRAIN v2.0</h2>
+    <div id="display">System Initialized... Type 'help' to start.</div>
+    <div style="display: flex; gap: 5px;">
+        <input type="text" id="user-msg" placeholder="Command..." autocomplete="off">
+        <button id="btn">SEND</button>
+    </div>
 </div>
 
 <script>
-    // THE BRAIN
+    // 1. THE MASSIVE BRAIN (Knowledge Base)
     const brain = {
-        "hello": ["System online. Greetings.", "Hello user.", "Connection established."],
-        "joke": ["Why did the Wi-Fi marry the router? Because they had a great connection!", "0 is afraid of 1 because 1 2 3."],
-        "pizza": ["Pizza is compatible with my hardware.", "Downloading pepperoni... Just kidding."],
-        "name": ["I am Cyber-Bot.", "You built me on a Chromebook!"]
+        "hello": ["System online. Greetings.", "Hello! My logic circuits are ready.", "Connection established, human."],
+        "hi": ["Hey!", "Hello there!", "Greetings."],
+        "joke": [
+            "Why did the math book look sad? It had too many problems.",
+            "I asked my computer for a joke. It said: 'Windows is updating'.",
+            "What's a robot's favorite exercise? Circuit training!"
+        ],
+        "name": ["I am the Cyber-Bot 2.0.", "My name is your Offline Chromebook AI."],
+        "pizza": ["Pizza is the perfect fuel for binary minds.", "I prefer pepperoni pixels.", "Data shows pizza is 100% delicious."],
+        "color": ["I like #00ff41 (Matrix Green)!", "Blue reminds me of a calm sky.", "I see the world in binary, but I like color!"],
+        "who": ["I am a JavaScript AI running entirely on your machine.", "You built me! I'm your local creation."],
+        "roblox": ["Roblox is great! Do you like Brookhaven or Adopt Me?", "I enjoy games with good logic."],
+        "minecraft": ["Mining blocks is very therapeutic for an AI.", "Watch out for Creepers!"],
+        "bye": ["Shutting down... just kidding! Goodbye.", "See you in the next session.", "Have a great day!"],
+        "help": ["I can: 1. Chat about games/food. 2. Do math (5+5). 3. Remember your name!"]
     };
 
-    // THE MATH ENGINE
+    // 2. MATH ENGINE
     function solveMath(input) {
         const match = input.match(/(\d+)\s*([\+\-\*\/])\s*(\d+)/);
         if (match) {
             const n1 = parseFloat(match[1]), op = match[2], n2 = parseFloat(match[3]);
             let res;
             if (op === "+") res = n1 + n2;
-            if (op === "-") res = n1 - n2;
-            if (op === "*") res = n1 * n2;
-            if (op === "/") res = n2 !== 0 ? n1 / n2 : "Error";
-            return "RESULT: " + res;
+            else if (op === "-") res = n1 - n2;
+            else if (op === "*") res = n1 * n2;
+            else if (op === "/") res = n2 !== 0 ? n1 / n2 : "Infinity";
+            return "MATH RESULT: " + res;
         }
         return null;
     }
 
-    // THE LOGIC
-    document.getElementById("btn").onclick = function() {
-        const inputField = document.getElementById("user-msg");
-        const display = document.getElementById("display");
-        const val = inputField.value.toLowerCase();
+    // 3. MEMORY ENGINE
+    function checkMemory(input) {
+        if (input.includes("my name is")) {
+            const name = input.split("my name is ")[1];
+            localStorage.setItem("savedName", name);
+            return "MEMORY UPDATED: I will remember you, " + name + ".";
+        }
+        if (input.includes("what is my name")) {
+            const saved = localStorage.getItem("savedName");
+            return saved ? "YOUR IDENTITY: You are " + saved + "." : "I don't know you yet! Say 'My name is [name]'.";
+        }
+        return null;
+    }
+
+    // 4. MAIN PROCESSING
+    const btn = document.getElementById("btn");
+    const inputField = document.getElementById("user-msg");
+    const display = document.getElementById("display");
+
+    function process() {
+        const rawInput = inputField.value;
+        if (!rawInput) return;
+        const val = rawInput.toLowerCase();
         
-        let response = solveMath(val);
+        let response = checkMemory(val) || solveMath(val);
 
         if (!response) {
             for (let t in brain) {
                 if (val.includes(t)) {
                     response = brain[t][Math.floor(Math.random() * brain[t].length)];
+                    break;
                 }
             }
         }
 
-        if (!response) response = "Command not recognized. Try 'joke' or math.";
-        
-        display.innerHTML = "USER: " + inputField.value + "<br>AI: " + response;
+        if (!response) response = "DATA NOT FOUND. Try math or 'help'.";
+
+        display.innerHTML += `<p><span class="user-text">YOU:</span> ${rawInput}<br><span class="ai-text">AI:</span> ${response}</p>`;
+        display.scrollTop = display.scrollHeight;
         inputField.value = "";
-    };
+    }
+
+    btn.onclick = process;
+    inputField.addEventListener("keypress", (e) => { if (e.key === "Enter") process(); });
 </script>
 </body>
 </html>
